@@ -20,5 +20,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:padding="10dp"
+        android:focusable="false"
         />
 </RelativeLayout>
