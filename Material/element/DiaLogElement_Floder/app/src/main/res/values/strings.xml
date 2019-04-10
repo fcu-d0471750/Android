@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">DiaLogElement</string>
+
+    <string name="lunch_time">午餐時間</string>
+    <string name="want_to_eat">想吃甚麼?</string>
+
+    <string name="Accept">好</string>
+    <string name="gogo">吃一餐</string>
+
+    <string name="Cancel">不吃</string>
+    <string name="i_am_not_hungry">我不餓</string>
+
+    <string name="Wait">考慮一下</string>
+    <string name="diet">也許等下再吃</string>
+
+
+    <string name="lunch_1">排骨</string>
+    <string name="lunch_2">燒肉</string>
+    <string name="lunch_3">飯糰</string>
+    <string name="lunch_4">蛋餅</string>
+    <string name="lunch_5">炒麵</string>
+
+    <string name="Eat">吃 </string>
+
+    <string name="Input_user_name">請輸入名稱</string>
+
+    <string name="Yes">確認</string>
+    <string name="No">取消</string>
+
+    <string name="Hi">很高興認識: </string>
+
+</resources>
