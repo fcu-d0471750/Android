@@ -4,6 +4,7 @@
 * */
 package com.example.user.dialogelement;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class DiaLogActivity extends AppCompatActivity {
@@ -38,9 +42,10 @@ public class DiaLogActivity extends AppCompatActivity {
     //自訂
     public Button User_Button;
 
-
-    //自訂格式
-    //final Dialog dialog = new Dialog(DiaLogActivity.this);
+    //行事曆
+    public Button Date_Button;
+    //行事曆TextView
+    public TextView Date_TextView;
 
     //========================================
     //宣告變數
@@ -56,6 +61,9 @@ public class DiaLogActivity extends AppCompatActivity {
 
     //多選式項目記錄
     boolean[] checkedboolArray;
+
+    //行事曆年、月、日
+    private int mYear, mMonth, mDay;
 
     //========================================
     //onCreate
@@ -88,6 +96,9 @@ public class DiaLogActivity extends AppCompatActivity {
         SingleChoice_Button = (Button) findViewById(R.id.SingleChoice_Button);
         MultiChoice_Button = (Button) findViewById(R.id.MultiChoice_Button);
         User_Button = (Button) findViewById(R.id.User_Button);
+
+        Date_Button = (Button) findViewById(R.id.Date_Button);
+        Date_TextView = (TextView) findViewById(R.id.Date_TextView);
     }
 
     //================================
@@ -104,6 +115,8 @@ public class DiaLogActivity extends AppCompatActivity {
         MultiChoice_Button_Function();
         //User_Button功能
         User_Button_Function();
+        //Date_Button功能
+        Date_Button_Function();
     }
 
     //================================
@@ -319,6 +332,48 @@ public class DiaLogActivity extends AppCompatActivity {
                         .show();
             }//onClick
         });//setOnClickListener
+    }
+
+
+    //================================
+    //Date_Button功能(行事曆對話框)
+    //================================
+    void Date_Button_Function(){
+        //獲得現在的年月日
+        Calendar c = Calendar.getInstance();
+        //記錄現在的年月日
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        Date_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(DiaLogActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        //將Calendar的年月日轉換成String
+                        String format = getString(R.string.Set_date) + setDateFormat(year,month,day);
+                        //記錄使用者輸入的年月日
+                        mYear = year;
+                        mMonth = month;
+                        mDay = day;
+                        //設定行事曆日期(如果是要使用者輸入日期，可將Date_TextView改成EditTextView)
+                        Date_TextView.setText(format);
+                    }
+                //下方mYear,mMonth, mDay為使用者開啟行事曆預設的日期
+                }, mYear,mMonth, mDay).show();
+            }//onClick
+        });//setOnClickListener
+    }
+
+    //================================
+    //將Calendar的年月日轉換成String
+    //================================
+    private String setDateFormat(int year,int monthOfYear,int dayOfMonth){
+        return String.valueOf(year) + "-"
+                + String.valueOf(monthOfYear + 1) + "-"
+                + String.valueOf(dayOfMonth);
     }
 
 }//DiaLogActivity

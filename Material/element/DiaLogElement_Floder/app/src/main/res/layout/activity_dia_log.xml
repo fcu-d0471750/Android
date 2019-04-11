@@ -47,5 +47,29 @@
             android:layout_below="@id/MultiChoice_Button"
             android:text="User" />
 
+        <ImageView
+            android:id="@+id/Separent_Linre_1"
+            android:layout_width="fill_parent"
+            android:layout_height="5dp"
+            android:layout_below="@id/User_Button"
+            android:background="#ff0000" />
+
+        <Button
+            android:id="@+id/Date_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Separent_Linre_1"
+            android:text="Date" />
+
+        <TextView
+            android:id="@+id/Date_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Date_Button"
+            android:layout_alignBottom="@+id/Date_Button"
+            android:layout_toEndOf="@+id/Date_Button"
+            android:layout_toRightOf="@+id/Date_Button"
+            android:text="TextView" />
+
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

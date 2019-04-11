@@ -29,4 +29,6 @@
 
     <string name="Hi">很高興認識: </string>
 
+    <string name="Set_date">你設定的日期: </string>
+
 </resources>
