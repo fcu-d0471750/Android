@@ -4,33 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.user.basicintent.MainActivity">
+    tools:context="com.example.user.basicintent.ResultActive">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/Show_TextView"
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="ResultText" />
 
         <Button
-            android:id="@+id/BasicIntent_Button"
+            android:id="@+id/Back_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BasicIntent"
-            android:layout_below="@id/Show_TextView"
-
-            />
-
-        <Button
-            android:id="@+id/Intent_Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Intent"
-            android:layout_below="@id/BasicIntent_Button"
+            android:text="Back"
+            android:layout_below="@id/textView"
             />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>
