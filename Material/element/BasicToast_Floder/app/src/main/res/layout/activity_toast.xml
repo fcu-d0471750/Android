@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.user.basictoast.ToastActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/BasicToast_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BasicToast" />
+
+
+        <Button
+            android:id="@+id/UserToast_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/BasicToast_Button"
+            android:text="UserToast" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/UserToast_Button"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButton_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/UserToast_Button"
+                android:text="上"
+                android:checked="true"
+                />
+
+            <RadioButton
+                android:id="@+id/radioButton_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/radioButton_up"
+                android:layout_alignBottom="@+id/radioButton_up"
+                android:layout_toEndOf="@+id/radioButton_up"
+                android:layout_toRightOf="@+id/radioButton_up"
+                android:text="下" />
+
+            <RadioButton
+                android:id="@+id/radioButton_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/radioButton_down"
+                android:layout_alignBottom="@+id/radioButton_down"
+                android:layout_toEndOf="@+id/radioButton_down"
+                android:layout_toRightOf="@+id/radioButton_down"
+                android:text="左" />
+
+            <RadioButton
+                android:id="@+id/radioButton_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/radioButton_left"
+                android:layout_alignBottom="@+id/radioButton_left"
+                android:layout_toEndOf="@+id/radioButton_left"
+                android:layout_toRightOf="@+id/radioButton_left"
+                android:text="右" />
+
+            <RadioButton
+                android:id="@+id/radioButton_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/radioButton_right"
+                android:layout_alignBottom="@+id/radioButton_right"
+                android:layout_toEndOf="@+id/radioButton_right"
+                android:layout_toRightOf="@+id/radioButton_right"
+                android:text="中" />
+        </RadioGroup>
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>
