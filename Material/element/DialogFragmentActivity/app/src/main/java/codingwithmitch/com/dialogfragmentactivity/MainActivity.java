@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import static javax.xml.datatype.DatatypeFactory.newInstance;
+
 public class MainActivity extends AppCompatActivity implements MyCustomDialog.OnInputListener {
 
     //private static final String TAG = "MainActivity";
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
             @Override
             public void onClick(View v) {
                 //new一個自製的DiaLog
-                MyCustomDialog dialog = new MyCustomDialog();
+                MyCustomDialog dialog = new MyCustomDialog().newInstance(0);
                 //顯示自製的DiaLog
                 dialog.show(getFragmentManager(), "MyCustomDialog");
 
