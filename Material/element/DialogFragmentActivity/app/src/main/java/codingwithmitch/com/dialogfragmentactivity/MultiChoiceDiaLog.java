@@ -1,3 +1,6 @@
+/*
+* MultiChoiceDialog功能
+* */
 package codingwithmitch.com.dialogfragmentactivity;
 
 import android.app.Dialog;
@@ -82,6 +85,7 @@ public class MultiChoiceDiaLog extends DialogFragment {
         //依照接收的checkedboolArray設定以選擇的項目
         checkedStatusList_Initial();
 
+        //設定DiaLog為 MultiChoiceDiaLog
         builder = MultiChoiceDiaLog_Create(builder);
 
         // Create the AlertDialog object and return it
@@ -126,7 +130,7 @@ public class MultiChoiceDiaLog extends DialogFragment {
 
                         //有選擇項目
                         if(Isempty == false) Toast.makeText(getActivity(), "你選擇的是" + sb.toString(), Toast.LENGTH_SHORT).show();
-                            //沒有選擇項目
+                        //沒有選擇項目
                         else Toast.makeText(getActivity(), "請選擇項目" , Toast.LENGTH_SHORT).show();
                     }
                 })

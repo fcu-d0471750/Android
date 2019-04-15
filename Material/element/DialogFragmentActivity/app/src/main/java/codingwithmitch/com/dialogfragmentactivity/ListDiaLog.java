@@ -1,3 +1,6 @@
+/*
+*ListDiaLog功能
+* */
 package codingwithmitch.com.dialogfragmentactivity;
 
 import android.app.Dialog;
@@ -52,6 +55,7 @@ public class ListDiaLog extends DialogFragment {
         //取得要顯示的DiaLog編號
         Lunch = getArguments().getStringArrayList("Lunch");
 
+        //設定DiaLog為ListDiaLog
         builder = ListDiaLog_Create(builder);
 
         // Create the AlertDialog object and return it

@@ -68,13 +68,13 @@
             android:layout_marginTop="20sp"/>
 
         <Button
+            android:id="@+id/UserDialog_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="open dialog"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/open_dialog"
             android:layout_below="@+id/Date_dialog_Button"
-            android:layout_marginTop="20sp"/>
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20sp"
+            android:text="USER DIALOG" />
 
 
         <TextView

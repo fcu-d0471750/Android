@@ -1,3 +1,8 @@
+/*
+* 主要執行區域
+*不同按扭會呼叫不同的DialogFragment執行，可依照需要載入需要的DialogFragment並自訂。
+* */
+
 package codingwithmitch.com.dialogfragmentactivity;
 
 import android.support.v7.app.AppCompatActivity;
@@ -19,18 +24,18 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
     //======================================================
     //宣告UI
     //======================================================
-    //BasicDiaLog按扭
+    //BasicDiaLog按扭(基本)
     public Button BasicDiaLog_Button;
-    //ListDiaLog按扭
+    //ListDiaLog按扭(條列式)
     public Button ListDiaLog_Button;
-    //SingleDiaLog按扭
+    //SingleDiaLog按扭(單選式)
     public Button SingleDiaLog_Button;
-    //MultiDiaLog按扭
+    //MultiDiaLog按扭(多選式)
     public Button MultiDiaLog_Button;
-    //DateDiaLog按扭
+    //DateDiaLog按扭(行事曆)
     public Button DateDiaLog_Button;
-    //開啟自訂Dialog按鈕
-    private Button mOpenDialog;
+    //開啟自訂Dialog按鈕(客製化)
+    private Button UserDialog_Button;
     //輸入的TextView
     public TextView mInputDisplay;
 
@@ -46,13 +51,13 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
     ArrayList<String> Lunch = new ArrayList<String>();
 
     //單選式記錄編號
-    private int singleChoiceIndex = 1;
+    private int singleChoiceIndex = 0;
 
     //多選式項目記錄
     private boolean[] checkedboolArray;
 
     //行事曆年、月、日
-    private int mYear=1990, mMonth=1, mDay=1;
+    private int mYear = 1990, mMonth = 1, mDay = 1;
 
     //======================================================
     //onCreate
@@ -64,9 +69,9 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
 
         //UI初始化
         UI_Initial();
-
+        //Lunch String初始化
         Lunch_String_Initial();
-
+        //checkedStatusList初始化
         checkedStatusList_Initial();
 
         //Button功能初始化
@@ -79,12 +84,19 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
     //UI初始化
     //======================================================
     void UI_Initial(){
+        //BasicDialog功能(基本)
         BasicDiaLog_Button = (Button) findViewById(R.id.Basic_dialog_Button);
+        //ListDialog功能(條列式)
         ListDiaLog_Button = (Button) findViewById(R.id.List_dialog_Button);
+        //SingleDialog功能(單選式)
         SingleDiaLog_Button = (Button) findViewById(R.id.Single_dialog_Button);
+        //MultiDialog功能(多選式)
         MultiDiaLog_Button = (Button) findViewById(R.id.Multi_dialog_Button);
+        //DateDialog功能(行事曆)
         DateDiaLog_Button = (Button) findViewById(R.id.Date_dialog_Button);
-        mOpenDialog = (Button) findViewById(R.id.open_dialog);
+        //UserDialog功能(客製化)
+        UserDialog_Button = (Button) findViewById(R.id.UserDialog_Button);
+        //TextView
         mInputDisplay =(TextView) findViewById(R.id.input_display);
     }
 
@@ -93,12 +105,18 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
     //Button功能初始化
     //======================================================
     void Button_Initial(){
-        mOpenDialog_Function();
+        //BasicDialog功能
         BasicDialog_Function();
+        //ListDialog功能
         ListDialog_Function();
+        //SingleDialog功能
         SingleDialog_Function();
+        //MultiDialog功能
         MultiDialog_Function();
+        //DateDialog功能
         DateDialog_Function();
+        //UserDialog功能(客製化)
+        mOpenDialog_Function();
     }
 
 
@@ -110,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
         BasicDiaLog_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //new一個自製的DiaLog
+                //new一個BasicDiaLog
                 BasicDiaLog dialog = new BasicDiaLog();
                 //顯示自製的DiaLog
                 dialog.show(getFragmentManager(), "BasicDiaLog");
@@ -126,10 +144,10 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
         ListDiaLog_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //new一個自製的DiaLog
+                //new一個ListDiaLog
                 ListDiaLog dialog = new ListDiaLog().newInstance(Lunch);
                 //顯示自製的DiaLog
-                dialog.show(getFragmentManager(), "BasicDiaLog");
+                dialog.show(getFragmentManager(), "ListDiaLog");
 
             }
         });//setOnClickListener
@@ -142,10 +160,10 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
         SingleDiaLog_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //new一個自製的DiaLog
+                //new一個SingleChoiceDiaLog
                 SingleChoiceDiaLog dialog = new SingleChoiceDiaLog().newInstance(singleChoiceIndex , Lunch);
                 //顯示自製的DiaLog
-                dialog.show(getFragmentManager(), "BasicDiaLog");
+                dialog.show(getFragmentManager(), "SingleDiaLog");
 
             }
         });//setOnClickListener
@@ -158,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
         MultiDiaLog_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //new一個自製的DiaLog
+                //new一個MultiChoiceDiaLog
                 MultiChoiceDiaLog dialog = new MultiChoiceDiaLog().newInstance(checkedboolArray , Lunch);
                 //顯示自製的DiaLog
                 dialog.show(getFragmentManager(), "MultiDiaLog");
@@ -177,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
                 //new一個自製的DiaLog
                 DateDiaLog dialog = new DateDiaLog().newInstance(mYear , mMonth , mDay);
                 //顯示自製的DiaLog
-                dialog.show(getFragmentManager(), "MultiDiaLog");
+                dialog.show(getFragmentManager(), "DateDiaLog");
 
             }
         });//setOnClickListener
@@ -185,17 +203,16 @@ public class MainActivity extends AppCompatActivity implements MyCustomDialog.On
 
 
     //======================================================
-    //mOpenDialog功能
+    //UserDialog功能
     //======================================================
     void mOpenDialog_Function(){
-        mOpenDialog.setOnClickListener(new View.OnClickListener() {
+        UserDialog_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //new一個自製的DiaLog
-                MyCustomDialog dialog = new MyCustomDialog().newInstance(4);
+                MyCustomDialog dialog = new MyCustomDialog();
                 //顯示自製的DiaLog
                 dialog.show(getFragmentManager(), "MyCustomDialog");
-
             }
         });//setOnClickListener
     }
