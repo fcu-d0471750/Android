@@ -5,7 +5,10 @@
 
     <string name="No">取消</string>
 
+    <string name="Wait">考慮一下</string>
+
     <string name="Title">這是一個標題</string>
+    <string name="Message">這是一個內容</string>
 
 
     <string name="lunch_1">排骨</string>
@@ -13,5 +16,12 @@
     <string name="lunch_3">飯糰</string>
     <string name="lunch_4">蛋餅</string>
     <string name="lunch_5">炒麵</string>
+
+    <string name="gogo">吃一餐</string>
+
+    <string name="Eat">吃 </string>
+
+    <string name="Set_date">你設定的日期: </string>
+
 
 </resources>

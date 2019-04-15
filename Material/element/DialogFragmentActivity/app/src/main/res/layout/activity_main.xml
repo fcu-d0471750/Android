@@ -25,10 +25,28 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Basic dialog"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/Basic_dialog_Button"
+            android:layout_below="@+id/heading"
+            android:layout_marginTop="20sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="List dialog"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/List_dialog_Button"
+            android:layout_below="@+id/Basic_dialog_Button"
+            android:layout_marginTop="20sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="open dialog"
             android:layout_centerHorizontal="true"
             android:id="@+id/open_dialog"
-            android:layout_below="@+id/heading"
+            android:layout_below="@+id/List_dialog_Button"
             android:layout_marginTop="20sp"/>
 
         <TextView
