@@ -43,21 +43,52 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="open dialog"
+            android:text="Single dialog"
             android:layout_centerHorizontal="true"
-            android:id="@+id/open_dialog"
+            android:id="@+id/Single_dialog_Button"
             android:layout_below="@+id/List_dialog_Button"
             android:layout_marginTop="20sp"/>
 
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/input_display"
-            android:layout_below="@+id/open_dialog"
-            android:layout_marginTop="20dp"
+            android:text="Multi dialog"
             android:layout_centerHorizontal="true"
-            android:textSize="15sp"
-            android:textColor="#000"/>
+            android:id="@+id/Multi_dialog_Button"
+            android:layout_below="@+id/Single_dialog_Button"
+            android:layout_marginTop="20sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date dialog"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/Date_dialog_Button"
+            android:layout_below="@+id/Multi_dialog_Button"
+            android:layout_marginTop="20sp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="open dialog"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/open_dialog"
+            android:layout_below="@+id/Date_dialog_Button"
+            android:layout_marginTop="20sp"/>
+
+
+        <TextView
+            android:id="@+id/input_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/Date_dialog_Button"
+            android:layout_alignBottom="@+id/Date_dialog_Button"
+            android:layout_marginLeft="23dp"
+            android:layout_marginStart="23dp"
+            android:layout_toEndOf="@+id/heading"
+            android:layout_toRightOf="@+id/heading"
+            android:textColor="#000"
+            android:textSize="15sp" />
 
 
 

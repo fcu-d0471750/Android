@@ -28,6 +28,7 @@ public class BasicDiaLog extends DialogFragment {
         // Use the Builder class for convenient dialog construction
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        //設定DiaLog為BasicDiaLog
         builder = BasicDiaLog_Create(builder);
 
         // Create the AlertDialog object and return it
