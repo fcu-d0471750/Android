@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -101,6 +102,10 @@ public class MainActivity extends AppCompatActivity {
     //====================================================================
     private void initData() {
         mStorageRef = FirebaseStorage.getInstance().getReference();
+        //riversRef = mStorageRef.child("AAA/op.png");
+        //imgPath = riversRef.getDownloadUrl().toString();
+        //Log.d("aaap.png" , riversRef.toString());//gs://picturefirebasesmall.appspot.com/sdg.png
+        //gs://picturefirebasesmall.appspot.com/AAA/op.png
     }
 
     //====================================================================
@@ -196,6 +201,9 @@ public class MainActivity extends AppCompatActivity {
     //功能: 刪除圖片
     //====================================================================
     private void deleteImg(final StorageReference ref){
+        //刪除圖片的位置，就跟下載圖片的位置一樣，也可以指定
+        //ref = mStorageRef.child("AAA/op.png");
+
         //如果沒有圖片路徑，表示沒有上傳圖片
         if(ref == null){
             //顯示 請上傳圖片 訊息
@@ -226,17 +234,22 @@ public class MainActivity extends AppCompatActivity {
     //功能: 下載圖片
     //====================================================================
     private void downloadImg(final StorageReference ref){
-        //如果沒有圖片路徑，表示沒有上傳圖片
+
+        //如果沒有FireBase的圖片路徑，表示沒有上傳圖片
         if(ref == null){
             //顯示 請上傳圖片 訊息
             Toast.makeText(MainActivity.this, R.string.plz_upload_img, Toast.LENGTH_SHORT).show();
             return;
         }
 
-        //(下載成功)
+        //如果要指定路徑下載，可使用下面一行指定路徑，(但由於副程式開頭宣告ref是設為final不能在這裡修改)
+        //riversRef = mStorageRef.child("AAA/op.png");
+
+        //(下載成功)，(如果要取得下載圖片的真正網址(Http)開頭，就只能在下面new OnSuccessListener<Uri>裡面的Uri來獲得)
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
+
                 //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
                 Glide.with(MainActivity.this)
                         .using(new FirebaseImageLoader())
@@ -260,8 +273,9 @@ public class MainActivity extends AppCompatActivity {
     //功能: 上傳圖片
     //====================================================================
     private void uploadImg(String path){
-        //file儲存圖片路徑
+        //file要上傳的圖片路徑
         Uri file = Uri.fromFile(new File(path));
+
         //StorageMetadata用於給於圖片額外資訊，例如名稱、時間、地點
         StorageMetadata metadata = new StorageMetadata.Builder()
                 //
@@ -269,8 +283,13 @@ public class MainActivity extends AppCompatActivity {
                 //檔案類型
                 .setContentType("image/jpg")
                 .build();
-        //將file儲存圖片路徑轉換成String
+
+        //riversRef設定為上傳到FireBase之後的Uri，將file儲存圖片路徑轉換成String
+        //(如果要指定上傳路徑，則在file.getLastPathSegment()前面加上最後的資料夾位置，例"AAA/"+file.getLastPathSegment() 、 "AAA/BBB/" +file.getLastPathSegment() )
+        //.child會自動補上開發者FireBase的網址，開發者只需填上要儲存的位置
+        //.getLastPathSegment是取得選擇的圖片位置最後的名稱，也就是圖片名稱
         riversRef = mStorageRef.child(file.getLastPathSegment());
+
         //將riversRef放入uploadTask，預備上傳putFile(檔案，額外資訊)
         UploadTask uploadTask = riversRef.putFile(file, metadata);
         //(上傳失敗)
@@ -285,6 +304,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 uploadInfoText.setText(R.string.upload_success);
+
             }
         })
          //(上傳中)
@@ -301,6 +321,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     //====================================================================
