@@ -22,10 +22,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -56,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     //下載資訊TextView
     private TextView downloadInfoText;
 
-    //FireBase的根位置(像C:\\ D:\\ file::\\)
+    //FireBase
     private StorageReference mStorageRef;
     //使用者要使用的FireBase的資料位置 或 本機資料位置
     private StorageReference riversRef;
@@ -81,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
     private ProgressBar imgUploadProgress;
 
 
+    //====================================================================
+    //宣告動態新增元件
+    //====================================================================
+    //用於綁定要哪個Layout下的RelativeLayout
+    RelativeLayout relativeLayout;
+    //新增圖片1
+    ImageView tv1;
+    //新增圖片2
+    ImageView tv2;
 
     //====================================================================
     //onCreate
@@ -102,10 +113,7 @@ public class MainActivity extends AppCompatActivity {
     //====================================================================
     private void initData() {
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        //riversRef = mStorageRef.child("AAA/op.png");
-        //imgPath = riversRef.getDownloadUrl().toString();
-        //Log.d("aaap.png" , riversRef.toString());//gs://picturefirebasesmall.appspot.com/sdg.png
-        //gs://picturefirebasesmall.appspot.com/AAA/op.png
+
     }
 
     //====================================================================
@@ -245,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         //如果要指定路徑下載，可使用下面一行指定路徑，(但由於副程式開頭宣告ref是設為final不能在這裡修改)
         //riversRef = mStorageRef.child("AAA/op.png");
 
-        //(下載成功)，(如果要取得下載圖片的真正網址(Http)開頭，就只能在下面new OnSuccessListener<Uri>裡面的Uri來獲得)
+        //(下載成功)，(如果要取得下載圖片的真正網址(Http)開頭，就只能在下面new OnSuccessListener<Uri>裡面的uri來獲得)
         ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -273,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
     //功能: 上傳圖片
     //====================================================================
     private void uploadImg(String path){
-        //file要上傳的圖片路徑
+        //file要上傳的圖片的本機路徑
         Uri file = Uri.fromFile(new File(path));
 
         //StorageMetadata用於給於圖片額外資訊，例如名稱、時間、地點
@@ -530,4 +538,91 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
-}
+
+
+
+    //====================================================================
+    //動態載入圖片
+    //====================================================================
+    void DynamicAddImage_1(){
+
+        //新增第1張Image
+        tv1 = new ImageView(this);
+
+        // 這一行是你想要讓你的圖片呈現原始大小
+        //RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+        //這一行是你想要讓你的圖片大小是多大，我想要的是100*100
+        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(100, 100);
+
+        //與父容器的左側對齊
+        lp.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+
+        //與父容器的上側對齊
+        lp.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+
+        //用於設定新增圖片的ID
+        int a = 1;
+        //設定新增圖片ID
+        tv1.setId(a);
+        //設定圖片位置
+        tv1.setLayoutParams(lp);
+        //加入新的圖片
+        relativeLayout.addView(tv1,lp);
+
+        //設定新的圖片來源
+        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
+                Glide.with(MainActivity.this)
+                        .using(new FirebaseImageLoader())
+                        .load(riversRef)
+                        .into(tv1);
+            }
+        });
+
+        //====================================================================
+        //(分隔線)
+        //====================================================================
+
+        //新增第2張Image
+        tv2 = new ImageView(this);
+
+        //這一行是你想要讓你的圖片大小是多大，我想要的是100*100
+        RelativeLayout.LayoutParams lp2 = new RelativeLayout.LayoutParams(100, 100);
+
+        //設定圖片在ID為1的元件下方(位置，ID)
+        lp2.addRule(RelativeLayout.BELOW, 1);
+        //設定圖片的左邊對齊ID為1的元件左方(位置，ID)
+        lp2.addRule(RelativeLayout.ALIGN_LEFT, 1);
+
+        //用於設定新增圖片的ID
+        int b = 2;
+        //設定新增圖片ID
+        tv2.setId(b);
+        //設定圖片位置
+        tv2.setLayoutParams(lp2);
+        //加入新的圖片
+        relativeLayout.addView(tv2,lp2);
+
+        //設定新的圖片來源
+        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+
+                //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
+                Glide.with(MainActivity.this)
+                        .using(new FirebaseImageLoader())
+                        .load(riversRef)
+                        .into(tv2);
+            }
+        });
+
+    }
+
+
+
+
+
+}//MainActivity
