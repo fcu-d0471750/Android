@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
     //識別使用者權限的識別碼
     private static final int REQUEST_EXTERNAL_STORAGE = 200;
 
+    //FireBase
+    FireBase_Basic_Class FBC;
 
     //====================================================================
     //宣告UI
@@ -58,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
     //下載資訊TextView
     private TextView downloadInfoText;
 
-    //FireBase
-    private StorageReference mStorageRef;
-    //使用者要使用的FireBase的資料位置 或 本機資料位置
-    private StorageReference riversRef;
 
     //選擇圖片Button
     private Button pickImgButton;
@@ -102,36 +100,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //FireBase初始化
-        initData();
+        FBC = new FireBase_Basic_Class();
 
         //UI初始化
         initView();
     }
 
-    //====================================================================
-    //資料庫連接初始化: 取得連接ID
-    //====================================================================
-    private void initData() {
-        mStorageRef = FirebaseStorage.getInstance().getReference();
 
-    }
-
-    //====================================================================
-    //判斷使用者是否有授予"讀檔權限"給 App 使用
-    //====================================================================
-    private void checkPermission(){
-        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
-
-        //沒有就開啟對話框請求權限
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            //未取得權限，向使用者要求允許權限
-            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
-        }
-        //有就直接選擇圖片
-        else {
-            getLocalImg();
-        }
-    }
 
     //====================================================================
     //UI初始化
@@ -178,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     //顯示進度條
                     imgUploadProgress.setVisibility(View.VISIBLE);
                     //上傳圖片
-                    uploadImg(imgPath);
+                    FBC.uploadImg(imgPath , imgUploadProgress , uploadInfoText);
                 }
                 //如果沒有選取圖片
                 else{
@@ -192,146 +167,37 @@ public class MainActivity extends AppCompatActivity {
         downloadImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                downloadImg(riversRef);
+                FBC.downloadImg(FBC.riversRef , MainActivity.this , downloadImg , downloadInfoText);
             }
         });
+
         //刪除圖片功能
         deleteImgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteImg(riversRef);
+                FBC.deleteImg(FBC.riversRef , MainActivity.this);
             }
         });
 
     }
 
     //====================================================================
-    //功能: 刪除圖片
+    //判斷使用者是否有授予"讀檔權限"給 App 使用
     //====================================================================
-    private void deleteImg(final StorageReference ref){
-        //刪除圖片的位置，就跟下載圖片的位置一樣，也可以指定
-        //ref = mStorageRef.child("AAA/op.png");
+    private void checkPermission(){
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE);
 
-        //如果沒有圖片路徑，表示沒有上傳圖片
-        if(ref == null){
-            //顯示 請上傳圖片 訊息
-            Toast.makeText(MainActivity.this, R.string.plz_upload_img, Toast.LENGTH_SHORT).show();
-            return;
+        //沒有就開啟對話框請求權限
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            //未取得權限，向使用者要求允許權限
+            ActivityCompat.requestPermissions(this, new String[] {android.Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_EXTERNAL_STORAGE);
         }
-
-        //如果有圖片路徑，表示有上傳圖片
-        //(上傳成功)
-        ref.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                //顯示 刪除成功 訊息
-                Toast.makeText(MainActivity.this, R.string.delete_success, Toast.LENGTH_SHORT).show();
-            }
-        })
-         //(上傳失敗)
-         .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                //顯示 刪除失敗 訊息
-                Toast.makeText(MainActivity.this, exception.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    //====================================================================
-    //功能: 下載圖片
-    //====================================================================
-    private void downloadImg(final StorageReference ref){
-
-        //如果沒有FireBase的圖片路徑，表示沒有上傳圖片
-        if(ref == null){
-            //顯示 請上傳圖片 訊息
-            Toast.makeText(MainActivity.this, R.string.plz_upload_img, Toast.LENGTH_SHORT).show();
-            return;
+        //有就直接選擇圖片
+        else {
+            getLocalImg();
         }
-
-        //如果要指定路徑下載，可使用下面一行指定路徑，(但由於副程式開頭宣告ref是設為final不能在這裡修改)
-        //riversRef = mStorageRef.child("AAA/op.png");
-
-        //(下載成功)，(如果要取得下載圖片的真正網址(Http)開頭，就只能在下面new OnSuccessListener<Uri>裡面的uri來獲得)
-        ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-
-                //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
-                Glide.with(MainActivity.this)
-                        .using(new FirebaseImageLoader())
-                        .load(ref)
-                        .into(downloadImg);
-                //顯示 下載成功 訊息
-                downloadInfoText.setText(R.string.download_success);
-            }
-        })
-          //(下載失敗)
-         .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                //顯示 下載失敗 訊息
-                downloadInfoText.setText(exception.getMessage());
-            }
-        });
     }
 
-    //====================================================================
-    //功能: 上傳圖片
-    //====================================================================
-    private void uploadImg(String path){
-        //file要上傳的圖片的本機路徑
-        Uri file = Uri.fromFile(new File(path));
-
-        //StorageMetadata用於給於圖片額外資訊，例如名稱、時間、地點
-        StorageMetadata metadata = new StorageMetadata.Builder()
-                //
-                .setContentDisposition("universe")
-                //檔案類型
-                .setContentType("image/jpg")
-                .build();
-
-        //riversRef設定為上傳到FireBase之後的Uri，將file儲存圖片路徑轉換成String
-        //(如果要指定上傳路徑，則在file.getLastPathSegment()前面加上最後的資料夾位置，例"AAA/"+file.getLastPathSegment() 、 "AAA/BBB/" +file.getLastPathSegment() )
-        //.child會自動補上開發者FireBase的網址，開發者只需填上要儲存的位置
-        //.getLastPathSegment是取得選擇的圖片位置最後的名稱，也就是圖片名稱
-        riversRef = mStorageRef.child(file.getLastPathSegment());
-
-        //將riversRef放入uploadTask，預備上傳putFile(檔案，額外資訊)
-        UploadTask uploadTask = riversRef.putFile(file, metadata);
-        //(上傳失敗)
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                uploadInfoText.setText(exception.getMessage());
-            }
-        })
-         //(上傳成功)
-         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                uploadInfoText.setText(R.string.upload_success);
-
-            }
-        })
-         //(上傳中)
-         .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                //取得上傳進度，並轉成int給使用者看
-                int progress = (int)((100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount());
-                //依照進度設定進度條
-                imgUploadProgress.setProgress(progress);
-                //如果完成，則隱藏進度條(View.VISIBLE: 顯示 View.GONE:隱藏)
-                if(progress >= 100){
-                    imgUploadProgress.setVisibility(View.GONE);
-                }
-            }
-        });
-
-
-    }
 
     //====================================================================
     //功能: 取得圖片
@@ -540,7 +406,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     //====================================================================
     //動態載入圖片
     //====================================================================
@@ -570,14 +435,14 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout.addView(tv1,lp);
 
         //設定新的圖片來源
-        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FBC.riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
 
                 //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
                 Glide.with(MainActivity.this)
                         .using(new FirebaseImageLoader())
-                        .load(riversRef)
+                        .load(FBC.riversRef)
                         .into(tv1);
             }
         });
@@ -607,14 +472,14 @@ public class MainActivity extends AppCompatActivity {
         relativeLayout.addView(tv2,lp2);
 
         //設定新的圖片來源
-        riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        FBC.riversRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
 
                 //(using:使用FirebaseImageLoader , load: 載入指定路徑的圖片 ,  into: 放入downloadImg顯示)
                 Glide.with(MainActivity.this)
                         .using(new FirebaseImageLoader())
-                        .load(riversRef)
+                        .load(FBC.riversRef)
                         .into(tv2);
             }
         });
