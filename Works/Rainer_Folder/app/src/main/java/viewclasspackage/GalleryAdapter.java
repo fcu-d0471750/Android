@@ -118,4 +118,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
 
     }
 
+    //======================================================================================
+    //刷新RecycleView
+    //======================================================================================
+    public void ViewUpdate(ArrayList<Rainer_item_Class> list ){
+        mDatas = list;
+        notifyDataSetChanged();
+    }
+
+
 }//GalleryAdapter

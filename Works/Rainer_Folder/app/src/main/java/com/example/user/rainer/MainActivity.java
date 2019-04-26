@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     //自訂GalleryAdapter
     private GalleryAdapter mAdapter;
     //自訂news類別List
-    private ArrayList<Rainer_item_Class> mDatas;
-    private Control_Class Con;
+    private ArrayList<Rainer_item_Class> mDatas  = new ArrayList<Rainer_item_Class>();
+    private Control_Class Con = new Control_Class(MainActivity.this);
     boolean check = false;
     //=======================================================================
     //宣告UI
@@ -46,24 +46,17 @@ public class MainActivity extends AppCompatActivity {
         //螢幕保持直向
         //setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         Log.d("Main" , "AAAA");
-        Con = new Control_Class(MainActivity.this);
+        //Con = new Control_Class(MainActivity.this);
 
 
 
-        mDatas = new ArrayList<Rainer_item_Class>();
+        //mDatas = new ArrayList<Rainer_item_Class>();
         mDatas = Con.Update_Model_View();
 
         //initDatas();
 
         //UI初始化
         UI_Inutial();
-
-        //new一個Adapter
-        //mAdapter = new GalleryAdapter(MainActivity.this, mDatas);
-        //設置自訂Adapter
-        //mRecyclerView.setAdapter(mAdapter);
-
-
 
     }
 
@@ -87,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 mDatas = Con.Update_Model_View();
+                //如果讀取完資料
                 if(check==false) {
                     //new一個Adapter
                     mAdapter = new GalleryAdapter(MainActivity.this, mDatas);
@@ -95,8 +89,13 @@ public class MainActivity extends AppCompatActivity {
                     //mAdapter.notifyItemRangeChanged(0,mDatas.size()-1);
                     check = true;
                 }
+                //RecycleView刷新
+                else{
+                    mDatas.set(0, new Rainer_item_Class("AAAA" , 15 , "AAAA" , 20 , 30 , 40 , "AAAAA"));
 
-                Log.d("RERE" , "" + mAdapter.getItemCount());
+                    mAdapter.ViewUpdate(mDatas);
+
+                }
 
             }
         });
