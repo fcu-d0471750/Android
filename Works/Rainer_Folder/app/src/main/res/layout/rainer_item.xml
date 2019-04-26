@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="@android:color/holo_blue_bright">
+
+
+        <TextView
+            android:id="@+id/location_name_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:text="台中"
+            android:textColor="#000000"
+            android:textSize="12dp" />
+
+
+        <ImageView
+            android:id="@+id/id_index_gallery_item_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_margin="5dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@id/location_name_textview"
+            />
+
+        <TextView
+            android:id="@+id/pop_value_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_index_gallery_item_image"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:text="降雨機率"
+            android:textColor="#000000"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/maxt_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pop_value_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:text="最高溫度"
+            android:textColor="#000000"
+            android:textSize="12dp"
+            />
+
+        <TextView
+            android:id="@+id/mint_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/maxt_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:text="最低溫度"
+            android:textColor="#000000"
+            android:textSize="12dp" />
+
+        <TextView
+            android:id="@+id/ci_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/mint_textview"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:text="舒適度"
+            android:textColor="#000000"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/Delvide"
+            android:layout_width="8dp"
+            android:layout_height="120dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop" />
+
+
+    </RelativeLayout>
+
+
+</android.support.constraint.ConstraintLayout>
