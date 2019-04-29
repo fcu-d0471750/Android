@@ -25,21 +25,15 @@ public class MainActivity extends AppCompatActivity {
     //=======================================================================
     //宣告變數
     //=======================================================================
-    //自訂GalleryAdapter
-    //private GalleryAdapter mAdapter;
-    //自訂news類別List
-    //private ArrayList<Rainer_item_Class> mDatas  = new ArrayList<Rainer_item_Class>();
+    //Control
     private Control_Class Con = new Control_Class(MainActivity.this , MainActivity.this);
-    public static final int msgKey1 = 1;
-    //boolean check = false;
+    //Thread(用於更新UI)
+    private Thread_Class thread_class = new Thread_Class(MainActivity.this , Con , 0);
 
     //=======================================================================
     //宣告UI
     //=======================================================================
-    //RecycleView
-    //private RecyclerView mRecyclerView;
 
-    //Button RE;
     //=======================================================================
     //onCreate
     //=======================================================================
@@ -51,26 +45,36 @@ public class MainActivity extends AppCompatActivity {
         //螢幕保持直向
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        //mDatas = new ArrayList<Rainer_item_Class>();
-
-        //mDatas = Con.Get_Model_Data();
-
         //Rainer初始化
         Con.Rainer_Initial();
 
-        Thread t = new Thread(runnable);
-        t.start();
-        //Con.Con_DO();
+    }
 
+    //=======================================================================
+    //onResume
+    //=======================================================================
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-        //Con.Update_Model_View();
-        //UI初始化
-        //UI_Inutial();
+        //使用Thread
+        thread_class.Thread_Use();
+    }
 
+    //=======================================================================
+    //onPause
+    //=======================================================================
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        //停用Thread
+        thread_class.Thread_Close();
     }
 
 
-  /*
+
+    /*
     *Thread更新View
     *sendMessage給Handle，在handleMessage
     *
@@ -81,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     * obj         Object           物件, 必須Parcelable
     * data        Bundle          Bundle物件
     * callback   Runnable     實作Runnable的callback
-    * */
+    *
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             }//switch
         }
     };
-
+*/
 
     //=======================================================================
     //UI初始化

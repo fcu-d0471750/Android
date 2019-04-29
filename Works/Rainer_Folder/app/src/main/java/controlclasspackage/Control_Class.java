@@ -8,6 +8,8 @@ package controlclasspackage;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -41,7 +43,6 @@ public class Control_Class {
     private Model_Class Model_Use;
     //View
     private View_Class View_Use;
-
 
 
     //=======================================================================

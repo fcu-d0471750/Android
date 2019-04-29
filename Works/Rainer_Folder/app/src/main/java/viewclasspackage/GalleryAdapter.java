@@ -89,15 +89,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder viewHolder, final int i)
     {
 
-        //設定圖片
-        viewHolder.mImg.setImageResource(R.drawable.bread_01);
+        //設定天氣圖片
+        //viewHolder.mImg.setImageResource(R.drawable.bread_01);
+        Set_mImg_Color(viewHolder , mDatas.get(i).getWx_value());
 
         //設定文字
         viewHolder.mlocation_name.setText(mDatas.get(i).getLocation_name());
-        viewHolder.mpop_value.setText(""+mDatas.get(i).getPop_value());
-        viewHolder.mmax_t.setText(""+mDatas.get(i).getMax_t());
-        viewHolder.mmin_t.setText(""+mDatas.get(i).getMin_t());
+        viewHolder.mpop_value.setText(""+mDatas.get(i).getPop_value() + " % ");
+        viewHolder.mmax_t.setText(""+mDatas.get(i).getMax_t() + " ℃");
+        viewHolder.mmin_t.setText(""+mDatas.get(i).getMin_t() + " ℃");
         viewHolder.mci.setText(mDatas.get(i).getCi());
+
+        //設定文字顏色
+        Set_pop_value_Color(viewHolder , mDatas.get(i).getPop_value());
+        Set_mmax_t_Color(viewHolder , mDatas.get(i).getMax_t());
+        Set_mmin_t_Color(viewHolder , mDatas.get(i).getMin_t());
 
         //點擊
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -126,5 +132,58 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         notifyDataSetChanged();
     }
 
+  /*
+    *設定UI外觀
+    *
+    * setTextColor(透明度、Red、Green、Blue)
+    * */
+  //======================================================================================
+    //設定降雨機率顏色
+  //======================================================================================
+    private void Set_pop_value_Color(final ViewHolder viewHolder , int Value){
+        if(Value >= 70){
+            viewHolder.mpop_value.setTextColor(0xffff00ff);
+        }
+        else if(Value > 30 && Value < 70){
+            viewHolder.mpop_value.setTextColor(0xff00ffff);
+        }
+        else{
+            viewHolder.mpop_value.setTextColor(0xff0000ff);
+        }
+    }
+
+    //======================================================================================
+    //設定最高溫度顏色
+    //======================================================================================
+    private void Set_mmax_t_Color(final ViewHolder viewHolder , int Value){
+            viewHolder.mmax_t.setTextColor(0xffff0000);
+    }
+
+    //======================================================================================
+    //設定最高溫度顏色
+    //======================================================================================
+    private void Set_mmin_t_Color(final ViewHolder viewHolder , int Value){
+        viewHolder.mmin_t.setTextColor(0xff0000ff);
+    }
+
+    //======================================================================================
+    //設定天氣圖片
+    //======================================================================================
+    private void Set_mImg_Color(final ViewHolder viewHolder , int Value){
+        switch (Value){
+            case 1:
+                viewHolder.mImg.setImageResource(R.drawable.sun);
+                break;
+            case 2:
+                viewHolder.mImg.setImageResource(R.drawable.mostlyclear);
+                break;
+            case 3:
+                viewHolder.mImg.setImageResource(R.drawable.partlyclear);
+                break;
+            default:
+                viewHolder.mImg.setImageResource(R.drawable.sun);
+                break;
+        }//switch
+    }
 
 }//GalleryAdapter

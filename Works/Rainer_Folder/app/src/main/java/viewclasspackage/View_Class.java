@@ -33,9 +33,9 @@ public class View_Class {
     private Context context;
     //外部的Activity(用於綁定UI)
     private Activity activity;
-
+    //接收Control的呼叫
     private Control_Class Con;
-
+    //是否為第1次載入資料，true:是 false:不是
     boolean check = false;
     //=======================================================================
     //宣告UI
@@ -46,7 +46,7 @@ public class View_Class {
     //RecycleView
     private RecyclerView mRecyclerView;
 
-    Button RE;
+    //Button RE;
     //===========================================================
     //建構子(外部的Activity)
     //===========================================================
@@ -56,7 +56,7 @@ public class View_Class {
         this.Con = Con;
     }
 
-    /*
+   /*
       =========================================================================================================================
      內部處理
     ==========================================================================================================================
@@ -74,7 +74,7 @@ public class View_Class {
         //設定方向
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
-        RE = (Button) activity.findViewById(R.id.rere);
+        /*RE = (Button) activity.findViewById(R.id.rere);
         RE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +96,7 @@ public class View_Class {
                 }
 
             }
-        });
+        });*/
 
 
     }
@@ -128,7 +128,7 @@ public class View_Class {
         }
         //RecycleView刷新
         else{
-            mDatas.set(0, new Rainer_item_Class("AAAA" , 15 , "AAAA" , 20 , 30 , 40 , "AAAAA"));
+            mDatas.set(0, new Rainer_item_Class("AAAA" , 15 , "AAAA" , 80 , 30 , 40 , "AAAAA"));
             mAdapter.ViewUpdate(mDatas);
 
         }

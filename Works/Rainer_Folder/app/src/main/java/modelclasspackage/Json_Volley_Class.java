@@ -124,18 +124,25 @@ public class Json_Volley_Class {
         String ci;
 
 
-        //取得停車場資訊主體資料，放到JSONArray
+        //取得天氣預報資訊主體資料，放到JSONArray
         JSONArray data = jsonObject.getJSONObject("records").getJSONArray("location");
 
-        //逐筆取得停車場地點
+        //逐筆取得天氣預報資料
         for (int i = 0; i < data.length(); i++) {
+            //地名
             JSONObject o = data.getJSONObject(i);
+
+            //天氣圖片ID
             JSONObject ow = o.getJSONArray("weatherElement").getJSONObject(0).getJSONArray("time").getJSONObject(0).getJSONObject("parameter");
+            //降雨機率
             JSONObject op = o.getJSONArray("weatherElement").getJSONObject(1).getJSONArray("time").getJSONObject(0).getJSONObject("parameter");
 
+            //最高溫
             JSONObject omn = o.getJSONArray("weatherElement").getJSONObject(2).getJSONArray("time").getJSONObject(0).getJSONObject("parameter");
+            //最低溫
             JSONObject omx = o.getJSONArray("weatherElement").getJSONObject(4).getJSONArray("time").getJSONObject(0).getJSONObject("parameter");
 
+            //舒適度
             JSONObject oc = o.getJSONArray("weatherElement").getJSONObject(3).getJSONArray("time").getJSONObject(0).getJSONObject("parameter");
 
 
