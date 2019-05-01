@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -9,7 +11,7 @@
         android:layout_margin="0dp"
         android:background="@android:color/transparent">
 
-
+        <!--地名-->
         <TextView
             android:id="@+id/location_name_textview"
             android:layout_width="wrap_content"
@@ -21,7 +23,7 @@
             android:textColor="#000000"
             android:textSize="24sp" />
 
-
+        <!--天氣圖片-->
         <ImageView
             android:id="@+id/id_index_gallery_item_image"
             android:layout_width="128dp"
@@ -32,24 +34,37 @@
             android:layout_margin="5dp"
             android:scaleType="centerCrop" />
 
+        <!--降雨機率-->
         <TextView
             android:id="@+id/pop_value_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/id_index_gallery_item_image"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
+            android:layout_alignBottom="@+id/ci_textview"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-
             android:text="100% "
             android:textColor="#000000"
             android:textSize="25dp" />
 
+        <!--最高溫度標題-->
+        <TextView
+            android:id="@+id/maxt_textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_index_gallery_item_image"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+
+            android:text="最高溫度"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <!--最高溫度-->
         <TextView
             android:id="@+id/maxt_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/id_index_gallery_item_image"
+            android:layout_below="@id/maxt_textview_title"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
@@ -58,11 +73,25 @@
             android:textColor="#000000"
             android:textSize="15dp" />
 
+        <!--最低溫度標題-->
+        <TextView
+            android:id="@+id/mint_textview_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/maxt_textview"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+
+            android:text="最低溫度"
+            android:textColor="#000000"
+            android:textSize="15dp" />
+
+        <!--最低溫度-->
         <TextView
             android:id="@+id/mint_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/maxt_textview"
+            android:layout_below="@id/mint_textview_title"
             android:layout_marginBottom="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
@@ -71,6 +100,7 @@
             android:textColor="#000000"
             android:textSize="15dp" />
 
+        <!--舒適度-->
         <TextView
             android:id="@+id/ci_textview"
             android:layout_width="wrap_content"
@@ -78,11 +108,28 @@
             android:layout_below="@id/id_index_gallery_item_image"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="晴午後多雲局部短暫陣雨或雷雨"
             android:textColor="#000000"
             android:textSize="15dp" />
 
+        <!--分隔線(底部)-->
+        <ImageView
+            android:id="@+id/Devide_Button_imageView"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/mint_textview"
+            android:scaleType="fitXY"
+            app:srcCompat="@android:drawable/bottom_bar" />
+
+        <!--分隔線(右方)
+        <ImageView
+            android:id="@+id/Devide_Right_imageView"
+            android:layout_width="2dp"
+            android:layout_height="fill_parent"
+            android:layout_alignParentRight="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@android:drawable/bottom_bar" />-->
 
     </RelativeLayout>
 

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Rainer</string>
+
+    <string name="DataSourceString">政府資料開放平台\n\n一般天氣預報-今明36小時天氣預報\n\n提供機關: 交通部中央氣象局\n\n授權方式: 政府資料開放授權條款-第1版\n\n計費方式: 免費\n</string>
+
+    <string name="MakerString">逢甲大學資訊工程學系 大學部\n</string>
 </resources>

@@ -1,6 +1,7 @@
 package viewclasspackage;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     private LayoutInflater mInflater;
     //資料
     private ArrayList<Rainer_item_Class> mDatas;
+    //外部的Activity
+    //private Context context;
 
     //=======================================================================
     //建構子
@@ -40,11 +43,21 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
             super(arg0);
         }
 
+        //天氣圖片
         ImageView mImg;
+        //地名
         TextView mlocation_name;
+        //降雨機率
         TextView mpop_value;
+        //最高溫度標題
+        TextView mmax_t_tilte;
+        //最高溫度
         TextView mmax_t;
+        //最低溫度標題
+        TextView mmin_t_tilte;
+        //最低溫度
         TextView mmin_t;
+        //舒適度
         TextView mci;
     }
 
@@ -73,10 +86,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         //綁定ImageView
         viewHolder.mImg = (ImageView) view.findViewById(R.id.id_index_gallery_item_image);
         //綁定TextView
+        //地名
         viewHolder.mlocation_name = (TextView) view.findViewById(R.id.location_name_textview);
+        //降雨機率
         viewHolder.mpop_value = (TextView) view.findViewById(R.id.pop_value_textview);
+        //最高溫度標題
+        viewHolder.mmax_t_tilte = (TextView) view.findViewById(R.id.maxt_textview_title);
+        //最高溫度
         viewHolder.mmax_t = (TextView) view.findViewById(R.id.maxt_textview);
+        //最低溫度標題
+        viewHolder.mmin_t_tilte = (TextView) view.findViewById(R.id.mint_textview_title);
+        //最低溫度
         viewHolder.mmin_t = (TextView) view.findViewById(R.id.mint_textview);
+        //舒適度
         viewHolder.mci = (TextView) view.findViewById(R.id.ci_textview);
 
         return viewHolder;
@@ -104,6 +126,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         Set_pop_value_Color(viewHolder , mDatas.get(i).getPop_value());
         Set_mmax_t_Color(viewHolder , mDatas.get(i).getMax_t());
         Set_mmin_t_Color(viewHolder , mDatas.get(i).getMin_t());
+
+        //設定文字字型
+        Set_Font(viewHolder , "fonts/circle.otf");
 
         //點擊
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -138,17 +163,39 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     * setTextColor(透明度、Red、Green、Blue)
     * */
   //======================================================================================
+  //設定文字字型(FontPath:文字路徑(fonts/....))
+  //======================================================================================
+  private void Set_Font(final ViewHolder viewHolder , String FontPath){
+      Typeface face = Typeface.createFromAsset(mInflater.getContext().getAssets(), FontPath);
+      //地名
+      viewHolder.mlocation_name.setTypeface(face);
+      //降雨機率
+      viewHolder.mpop_value.setTypeface(face);
+      //最高溫度標題
+      viewHolder.mmax_t_tilte.setTypeface(face);
+      //最高溫度
+      viewHolder.mmax_t.setTypeface(face);
+      //最低溫度標題
+      viewHolder.mmin_t_tilte.setTypeface(face);
+      //最低溫度
+      viewHolder.mmin_t.setTypeface(face);
+      //舒適度
+      viewHolder.mci.setTypeface(face);
+  }
+
+
+  //======================================================================================
     //設定降雨機率顏色
   //======================================================================================
     private void Set_pop_value_Color(final ViewHolder viewHolder , int Value){
         if(Value >= 70){
-            viewHolder.mpop_value.setTextColor(0xffff00ff);
+            viewHolder.mpop_value.setTextColor(0xff003d79);
         }
         else if(Value > 30 && Value < 70){
-            viewHolder.mpop_value.setTextColor(0xff00ffff);
+            viewHolder.mpop_value.setTextColor(0xff2894ff);
         }
         else{
-            viewHolder.mpop_value.setTextColor(0xff0000ff);
+            viewHolder.mpop_value.setTextColor(0xff97cbff);
         }
     }
 
@@ -156,14 +203,14 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     //設定最高溫度顏色
     //======================================================================================
     private void Set_mmax_t_Color(final ViewHolder viewHolder , int Value){
-            viewHolder.mmax_t.setTextColor(0xffff0000);
+            viewHolder.mmax_t.setTextColor(0xffad5a5a);
     }
 
     //======================================================================================
     //設定最高溫度顏色
     //======================================================================================
     private void Set_mmin_t_Color(final ViewHolder viewHolder , int Value){
-        viewHolder.mmin_t.setTextColor(0xff0000ff);
+        viewHolder.mmin_t.setTextColor(0xff8080c0);
     }
 
     //======================================================================================
@@ -185,5 +232,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
                 break;
         }//switch
     }
+
+
 
 }//GalleryAdapter
