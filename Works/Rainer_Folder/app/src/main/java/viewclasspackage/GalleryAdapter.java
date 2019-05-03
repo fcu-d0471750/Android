@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -114,6 +115,8 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         //設定天氣圖片
         //viewHolder.mImg.setImageResource(R.drawable.bread_01);
         Set_mImg_Color(viewHolder , mDatas.get(i).getWx_value());
+        //縮放動畫
+        viewHolder.mImg.startAnimation(AnimationUtils.loadAnimation(mInflater.getContext() , R.anim.scale));
 
         //設定文字
         viewHolder.mlocation_name.setText(mDatas.get(i).getLocation_name());

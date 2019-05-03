@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import java.util.ArrayList;
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
 
         //螢幕保持直向
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        //隱藏標題列
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         //Rainer初始化
         Con.Rainer_Initial();

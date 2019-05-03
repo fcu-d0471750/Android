@@ -7,12 +7,16 @@
 package viewclasspackage;
 
 
+import android.animation.Animator;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -39,8 +43,10 @@ public class View_Class {
 
     //接收Control的呼叫
     private Control_Class Con;
+
     //是否為第1次載入資料，true:是 false:不是
     boolean check = false;
+
     //=======================================================================
     //宣告UI
     //=======================================================================
@@ -98,6 +104,8 @@ public class View_Class {
     //DataSourse_Button功能
     //======================================================
     void DataSourse_Button_Function(){
+        Set_Button_Fonts(DataSourse_Button , "fonts/circle.otf");
+
         DataSourse_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +122,8 @@ public class View_Class {
     //Maker_Button功能
     //======================================================
     void Maker_Button_Function(){
+        Set_Button_Fonts(Maker_Button , "fonts/circle.otf");
+
         Maker_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,6 +134,14 @@ public class View_Class {
 
             }
         });//setOnClickListener
+    }
+
+    //======================================================
+    //設定Button字型
+    //======================================================
+    void Set_Button_Fonts(Button button , String path){
+        Typeface face = Typeface.createFromAsset(context.getAssets(), path);
+        button.setTypeface(face);
     }
 
   /*
