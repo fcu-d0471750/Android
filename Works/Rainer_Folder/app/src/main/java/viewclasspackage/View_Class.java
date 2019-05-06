@@ -18,12 +18,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.user.rainer.MainActivity;
 import com.example.user.rainer.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import controlclasspackage.Control_Class;
 import dialogpackage.BasicDiaLog;
@@ -61,6 +65,8 @@ public class View_Class {
 
     //製作方按扭
     private Button Maker_Button;
+
+
     //===========================================================
     //建構子(外部的Activity)
     //===========================================================
@@ -89,7 +95,9 @@ public class View_Class {
         mRecyclerView.setLayoutManager(linearLayoutManager);
         //綁定資料來源按扭
         DataSourse_Button = (Button) activity.findViewById(R.id.DataSourse_Button);
+        //榜定
         Maker_Button = (Button) activity.findViewById(R.id.Maker_Button);
+
     }
 
     //======================================================
@@ -143,6 +151,7 @@ public class View_Class {
         Typeface face = Typeface.createFromAsset(context.getAssets(), path);
         button.setTypeface(face);
     }
+
 
   /*
      =========================================================================================================================
