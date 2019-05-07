@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.user.rainer.MainActivity;
@@ -60,6 +61,9 @@ public class View_Class {
     //RecycleView
     private RecyclerView mRecyclerView;
 
+    //背景TextView
+    private TextView Background_TextView;
+
     //資料來源按扭
     private Button DataSourse_Button;
 
@@ -93,12 +97,23 @@ public class View_Class {
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         //設定方向
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        //綁定背景TextView
+        Background_TextView = (TextView) activity.findViewById(R.id.Background_TextView);
         //綁定資料來源按扭
         DataSourse_Button = (Button) activity.findViewById(R.id.DataSourse_Button);
-        //榜定
+        //綁定製作方按扭
         Maker_Button = (Button) activity.findViewById(R.id.Maker_Button);
 
     }
+
+    //======================================================
+    //TextView初始化
+    //======================================================
+    void TextView_Initial(){
+        Set_TextView_Fonts(Background_TextView ,"fonts/circle.otf");
+    }
+
+
 
     //======================================================
     //Button初始化
@@ -145,6 +160,14 @@ public class View_Class {
     }
 
     //======================================================
+    //設定TextView字型
+    //======================================================
+    void Set_TextView_Fonts(TextView textView , String path){
+        Typeface face = Typeface.createFromAsset(context.getAssets(), path);
+        textView.setTypeface(face);
+    }
+
+    //======================================================
     //設定Button字型
     //======================================================
     void Set_Button_Fonts(Button button , String path){
@@ -164,6 +187,8 @@ public class View_Class {
     public void UI_DO(){
         //UI初始化
         UI_Initial();
+        //TextView初始化
+        TextView_Initial();
         //Button初始化
         Button_FunctionI_Initial();
     }

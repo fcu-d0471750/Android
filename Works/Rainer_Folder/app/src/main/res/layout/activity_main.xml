@@ -18,7 +18,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/id_recyclerview_horizontal"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="350dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
@@ -36,6 +36,15 @@
             android:background="@color/Main_Constrain_Color"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/Background_TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="點擊開啟資訊"
+                android:textAlignment="center"
+                android:textSize="18sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,9 +54,10 @@
                     android:id="@+id/DataSourse__imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="0dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:paddingLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="2dp"
                     app:srcCompat="@drawable/datasource_image" />
 
                 <Button
@@ -61,9 +71,9 @@
                     android:layout_weight="1"
                     android:background="@drawable/datasource_button_shape"
                     android:paddingRight="0dp"
-                    android:text="資料來源"
-                    android:textColor="#ADCBFF"
-                    android:textSize="20dp" />
+                    android:text="資料來源\nDatasource"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="15sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -75,9 +85,10 @@
                     android:id="@+id/Maker_Button_imageView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_margin="0dp"
+                    android:layout_margin="10dp"
                     android:layout_weight="1"
-                    android:paddingLeft="5dp"
+                    android:background="@android:color/transparent"
+                    android:paddingLeft="2dp"
                     app:srcCompat="@drawable/maker_image" />
 
                 <Button
@@ -88,10 +99,11 @@
                     android:layout_margin="10dp"
                     android:layout_weight="1"
                     android:background="@drawable/datasource_button_shape"
-                    android:text="製作方"
-                    android:textColor="#ADCBFF"
-                    android:textSize="20dp" />
+                    android:text="製作方\nMaker"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="15sp" />
             </LinearLayout>
+
         </LinearLayout>
 
     </RelativeLayout>

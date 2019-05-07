@@ -31,7 +31,9 @@
             android:layout_below="@id/location_name_textview"
             android:layout_centerHorizontal="true"
             android:layout_centerInParent="true"
-            android:layout_margin="5dp"
+            android:layout_margin="20dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
             android:scaleType="centerCrop" />
 
         <!--降雨機率-->
@@ -44,7 +46,7 @@
             android:layout_alignParentRight="true"
             android:text="100% "
             android:textColor="#000000"
-            android:textSize="25dp" />
+            android:textSize="30sp" />
 
         <!--最高溫度標題-->
         <TextView
