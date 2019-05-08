@@ -70,6 +70,8 @@ public class View_Class {
     //製作方按扭
     private Button Maker_Button;
 
+    //
+
 
     //===========================================================
     //建構子(外部的Activity)

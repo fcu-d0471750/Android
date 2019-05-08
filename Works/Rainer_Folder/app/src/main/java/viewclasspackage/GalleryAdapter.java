@@ -210,7 +210,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
     }
 
     //======================================================================================
-    //設定最高溫度顏色
+    //設定最低溫度顏色
     //======================================================================================
     private void Set_mmin_t_Color(final ViewHolder viewHolder , int Value){
         viewHolder.mmin_t.setTextColor(0xff8080c0);
