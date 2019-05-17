@@ -8,7 +8,7 @@
 * 基本切換頁面。 
 
 ### BasicRecycleView_Folder
-* 獨立專案，用於上架App。 
+* 用於取代ListView，減少原本ListView使用時許多的問題。 
 
 ### BasicToast_Floder
 * 獨立專案，用於上架App。 
