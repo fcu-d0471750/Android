@@ -14,7 +14,7 @@
 * 基本Toast快顯元件，用於在畫面上短暫彈出一個訊息，而且不會影響Activity處理程序。 
 
 ### BasicVolley_Floder
-* 獨立專案，用於上架App。 
+* 用於取得網路上的資料，取代HttpURLConnection和HttpClient，Volley是屬於輕量級的HTTP Request處理工具，因此對於大量資料處理，不太理想。 
 
 ### DiaLogElement_Floder
 * 獨立專案，用於上架App。 
