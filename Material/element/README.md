@@ -11,7 +11,7 @@
 * 用於取代ListView，減少原本ListView使用時許多的問題。 
 
 ### BasicToast_Floder
-* 獨立專案，用於上架App。 
+* 基本Toast快顯元件，用於在畫面上短暫彈出一個訊息，而且不會影響Activity處理程序。 
 
 ### BasicVolley_Floder
 * 獨立專案，用於上架App。 
