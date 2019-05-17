@@ -5,7 +5,7 @@
 * 基本動畫，使用Property Animator。
 
 ### BasicIntent_Floder
-* 獨立專案，用於上架App。 
+* 基本切換頁面。 
 
 ### BasicRecycleView_Folder
 * 獨立專案，用於上架App。 
