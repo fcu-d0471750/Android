@@ -23,4 +23,4 @@
 * 用於取代DiaLog，基本包含Dialog的功能，並改善諸多缺點。 
 
 ### ListView_Button_Floder
-* 獨立專案，用於上架App。 
+* 基本的清單，可用於顯示大量重複性資料。 
