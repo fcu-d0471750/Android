@@ -2,7 +2,7 @@
 實際製作Android元件，包含程式碼、UI介面，可重複使用於後續的開發專案
 
 ### BasicAnimation_Folder
-* 實際製作Android元件，包含程式碼、UI介面，可重複使用於後續的開發專案。
+* 基本動畫，使用Property Animator。
 
 ### BasicIntent_Floder
 * 獨立專案，用於上架App。 
